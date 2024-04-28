@@ -1,4 +1,5 @@
 import { url } from "inspector";
+import { db } from "~/server/db";
 
 const mockUrls = [
   'https://utfs.io/f/cace3015-eac1-4460-8b11-b7a89d4331f3-4z956w.jpg',
@@ -12,7 +13,11 @@ const mockImages = mockUrls.map((url, index) => ({
   url
 }))
 
-export default function HomePage() {
+export default async function HomePage() {
+  const post = await db.query.posts.findMany()
+
+  console.log(post);
+  
   return (
     <main className="">
       <section className="flex flex-wrap">
