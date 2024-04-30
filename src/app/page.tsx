@@ -2,6 +2,7 @@ import { SignedIn, SignedOut } from "@clerk/nextjs";
 import { ImageUploader } from "./_components/image-uploader";
 import { getMyImages } from "~/server/queries";
 import Image from "next/image";
+import Link from "next/link";
 
 export const dynamic = 'force-dynamic'
 
@@ -13,7 +14,9 @@ async function Images() {
         {
           images.map(image => (
             <div key={image.id} className="flex flex-col p-4 size-48">
-              <Image src={image.url} width={480} height={480} alt={image.name} />
+              <Link href={`/image/${image.id}`}>
+                <Image src={image.url} width={480} height={480} alt={image.name} />
+              </Link>
             </div>
           ))
         }
