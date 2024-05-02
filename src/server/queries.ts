@@ -23,10 +23,14 @@ export async function getImage({imageId}:{imageId: number}) {
 
   if(!user.userId) throw new Error('Unauthorized')
 
-  const images = await db.query.images.findFirst({
+  const image = await db.query.images.findFirst({
     where: (model,{eq}) => eq(model.id, imageId ) 
   })
 
-  return images
+  if(!image) throw new Error('Image not Found')
+
+  if(image.userId !== user.userId) throw new Error('Unauthorized')
+
+  return image
   
 }
