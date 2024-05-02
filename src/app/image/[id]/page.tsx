@@ -1,12 +1,11 @@
-import { getImage } from "~/server/queries"
-import Image from "next/image"
+import { FullPageImageView } from "~/app/_components/full-page-image-view";
 
-export default async function ImagePage({params:{id: imageId}}:{params:{id: string}}) {
-  const idAsNumber = Number(imageId)
-  const image = await getImage({imageId: idAsNumber})
+export default function ImagePage({params:{id: imageId}}:{params:{id: string}}) {
   return (
-    <div>
-      <Image src={image.url} alt={image.name} width={124} height={124} />
-    </div>
+    <section className="flex flex-col justify-center items-center">
+      <article className="pt-16 flex flex-col justify-start gap-8">
+        <FullPageImageView id={imageId} />
+      </article>
+    </section>
   )
 }

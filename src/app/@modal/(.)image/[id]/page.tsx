@@ -1,12 +1,10 @@
-import Image from "next/image"
-import { getImage } from "~/server/queries"
+import { FullPageImageView } from "~/app/_components/full-page-image-view"
+import { Modal } from "~/app/_components/modal"
 
-export default async function ImageModal({params:{id: imageId}}:{params:{id: string}}) {
-  const idAsNumber = Number(imageId)
-  const image = await getImage({imageId: idAsNumber})
+export default  function ImageModal({params:{id: imageId}}:{params:{id: string}}) {
   return (
-    <div>
-      <Image src={image.url} alt={image.name} width={124} height={124} />
-    </div>
+    <Modal>
+      <FullPageImageView id={imageId} />
+    </Modal>
   )
 }
